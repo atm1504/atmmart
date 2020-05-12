@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'components/horizontal_list_view.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -171,7 +172,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: ListView(
-        children: <Widget>[imageCarousel],
+        children: <Widget>[
+          imageCarousel,
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Categories"),
+          ),
+          HorizontalList(),
+        ],
       ),
     );
   }
