@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'components/horizontal_list_view.dart';
@@ -174,9 +176,18 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: <Widget>[
           imageCarousel,
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Categories"),
+          Container(
+            color: Colors.blue,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Categories",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
           ),
           HorizontalList(),
         ],
