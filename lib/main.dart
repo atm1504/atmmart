@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,6 +16,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Widget imageCarousel = Container(
+      height: 200.0,
+      child: Carousel(
+        boxFit: BoxFit.cover,
+        images: [
+          NetworkImage(
+              'https://i.pinimg.com/originals/7a/1e/56/7a1e56fc58b13e8fc330b1ae97b40018.jpg'),
+          NetworkImage(
+              'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg'),
+          NetworkImage(
+              'https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297__340.jpg'),
+          NetworkImage(
+              'https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297__340.jpg'),
+          NetworkImage(
+              'https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+          NetworkImage(
+              'https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'),
+        ],
+        animationCurve: Curves.fastOutSlowIn,
+        animationDuration: Duration(milliseconds: 1000),
+        dotSize: 4.0,
+        indicatorBgPadding: 2.0,
+        dotColor: Colors.red,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -50,13 +76,6 @@ class _HomePageState extends State<HomePage> {
                     Icons.person,
                     color: Colors.white,
                   ),
-//                  child: Image(
-//                    width: 60,
-//                    height: 60,
-//                    image: NetworkImage(
-//                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-//                  ),
-//
                 ),
               ),
               decoration: BoxDecoration(
@@ -150,6 +169,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+      body: ListView(
+        children: <Widget>[imageCarousel],
       ),
     );
   }
