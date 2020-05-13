@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'components/horizontal_list_view.dart';
+import 'components/products.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -25,17 +26,15 @@ class _HomePageState extends State<HomePage> {
         boxFit: BoxFit.cover,
         images: [
           NetworkImage(
-              'https://i.pinimg.com/originals/7a/1e/56/7a1e56fc58b13e8fc330b1ae97b40018.jpg'),
+              "https://rukminim1.flixcart.com/image/880/1056/jlo1tow0/kids-t-shirt/h/k/x/3-4-years-kids-sl-boys-5c-tshirts-05-ml-kiddeo-original-imaf8qseeu4bgwrg.jpeg?q=50"),
+          NetworkImage('https://i.ytimg.com/vi/JAv7mLpyjJE/maxresdefault.jpg'),
           NetworkImage(
-              'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg'),
+              'https://morrispsych.com/wp-content/uploads/2009/12/girls.jpg'),
           NetworkImage(
-              'https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297__340.jpg'),
+              'https://i.dailymail.co.uk/1s/2019/12/13/22/22217802-0-image-a-98_1576275536642.jpg'),
           NetworkImage(
-              'https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297__340.jpg'),
-          NetworkImage(
-              'https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-          NetworkImage(
-              'https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'),
+              'https://d224nth7ac0evy.cloudfront.net/blog/cache/840x620/magefan_blog/Blog-Ideas-Man.jpg'),
+          NetworkImage('https://i.ytimg.com/vi/Fzf1NyBO5P0/hqdefault.jpg'),
         ],
         animationCurve: Curves.fastOutSlowIn,
         animationDuration: Duration(milliseconds: 1000),
@@ -190,6 +189,23 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           HorizontalList(),
+          Container(
+            color: Colors.blue,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Recent Products",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 320,
+            child: Products(),
+          )
         ],
       ),
     );
