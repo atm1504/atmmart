@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -88,7 +86,24 @@ class _ProductDetailsState extends State<ProductDetails> {
               // Size button
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Size"),
+                            content: Text("Choose the Size"),
+                            actions: <Widget>[
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text("Close"),
+                              )
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -106,7 +121,24 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Colors"),
+                            content: Text("Choose a Color"),
+                            actions: <Widget>[
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text("Close"),
+                              )
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -124,7 +156,24 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Quantity"),
+                            content: Text("Choose the Quantity"),
+                            actions: <Widget>[
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(context);
+                                },
+                                child: Text("Close"),
+                              )
+                            ],
+                          );
+                        });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.2,
@@ -166,6 +215,58 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   onPressed: () {})
             ],
+          ),
+          Divider(),
+          ListTile(
+            title: Text("Product Details"),
+            subtitle: Text(
+                "PolandBall is playing a game with EnemyBall. The rules are simple. Players have to say words in turns. You cannot say a word which was already said. PolandBall starts. The Ball which can't say a new word loses."),
+          ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
+                child: Text(
+                  "Product Name",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: Text(widget.prod_name),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
+                child: Text(
+                  "Product Brand",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: Text("Brand X"),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(12, 5, 5, 5),
+                child: Text(
+                  "Product Condition",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: Text("Well Furnished"),
           ),
         ],
       ),
