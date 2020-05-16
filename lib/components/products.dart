@@ -36,6 +36,27 @@ class _ProductsState extends State<Products> {
       "old_price": "999",
       "price": "179",
     },
+    {
+      "name": "Tshirt",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k0sgl8w0/jean/x/c/7/32-udjno5165-u-s-polo-association-original-imafkg6yfnmdgry6.jpeg?q=50",
+      "old_price": 1999,
+      "price": 999,
+    },
+    {
+      "name": "Gown",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k3hmj680/gown/5/p/8/na-free-gra-3-trilok-fab-na-original-imafmhpw8cncdz6d.jpeg?q=50",
+      "old_price": "3999",
+      "price": "499",
+    },
+    {
+      "name": "Salwar",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k2urhjk0/fabric/t/c/s/852dr157-852dr160-swaron-original-imafhvxfjz9ehs9z.jpeg?q=50",
+      "old_price": "999",
+      "price": "179",
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -80,24 +101,40 @@ class SingleProduct extends StatelessWidget {
                       ))),
               child: GridTile(
                   footer: Container(
-                    color: Colors.white70,
-                    child: ListTile(
-                      leading: Text(
-                        prod_name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      title: Text(
-                        "\$$prod_price",
-                        style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.w800),
-                      ),
-                      subtitle: Text(
-                        "\$$prod_old_price",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            decoration: TextDecoration.lineThrough),
-                      ),
+                    color: Colors.white,
+//                    child: ListTile(
+//                      leading: Text(
+//                        prod_name,
+//                        style: TextStyle(fontWeight: FontWeight.bold),
+//                      ),
+//                      title: Text(
+//                        "\$$prod_price",
+//                        style: TextStyle(
+//                            color: Colors.red, fontWeight: FontWeight.w800),
+//                      ),
+//                      subtitle: Text(
+//                        "\$$prod_old_price",
+//                        style: TextStyle(
+//                            color: Colors.black,
+//                            fontWeight: FontWeight.w600,
+//                            decoration: TextDecoration.lineThrough),
+//                      ),
+//                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            prod_name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ),
+                        Text(
+                          "\$${prod_price}",
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        )
+                      ],
                     ),
                   ),
                   child: Image.network(
