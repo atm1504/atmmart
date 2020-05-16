@@ -262,11 +262,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: Text("Well Furnished"),
+              ),
             ],
-          ),
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text("Well Furnished"),
           ),
         ],
       ),
