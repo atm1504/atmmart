@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:atmmart/main.dart';
+import 'package:atmmart/components/products.dart';
 
 class ProductDetails extends StatefulWidget {
   String prod_name;
@@ -268,8 +269,90 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ],
           ),
+          Divider(),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Text("Similar Products"),
+          ),
+          Container(
+            height: 360,
+            child: SimilarProducts(),
+          )
         ],
       ),
     );
+  }
+}
+
+class SimilarProducts extends StatefulWidget {
+  @override
+  _SimilarProductsState createState() => _SimilarProductsState();
+}
+
+class _SimilarProductsState extends State<SimilarProducts> {
+  var product_list = [
+    {
+      "name": "Black T-Shirt",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k3ncakw0/t-shirt/z/g/u/s-ke-tshirt-rh-black-white-7086-rebound-original-imafmqgnkddgds5e.jpeg?q=50",
+      "old_price": 999,
+      "price": 179,
+    },
+    {
+      "name": "Jeans",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k0sgl8w0/jean/x/c/7/32-udjno5165-u-s-polo-association-original-imafkg6yfnmdgry6.jpeg?q=50",
+      "old_price": 1999,
+      "price": 999,
+    },
+    {
+      "name": "Gown",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k3hmj680/gown/5/p/8/na-free-gra-3-trilok-fab-na-original-imafmhpw8cncdz6d.jpeg?q=50",
+      "old_price": "3999",
+      "price": "499",
+    },
+    {
+      "name": "Salwar",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k2urhjk0/fabric/t/c/s/852dr157-852dr160-swaron-original-imafhvxfjz9ehs9z.jpeg?q=50",
+      "old_price": "999",
+      "price": "179",
+    },
+    {
+      "name": "Jeans",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k0sgl8w0/jean/x/c/7/32-udjno5165-u-s-polo-association-original-imafkg6yfnmdgry6.jpeg?q=50",
+      "old_price": 1999,
+      "price": 999,
+    },
+    {
+      "name": "Gown",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k3hmj680/gown/5/p/8/na-free-gra-3-trilok-fab-na-original-imafmhpw8cncdz6d.jpeg?q=50",
+      "old_price": "3999",
+      "price": "499",
+    },
+    {
+      "name": "Salwar",
+      "picture":
+          "https://rukminim1.flixcart.com/image/880/1056/k2urhjk0/fabric/t/c/s/852dr157-852dr160-swaron-original-imafhvxfjz9ehs9z.jpeg?q=50",
+      "old_price": "999",
+      "price": "179",
+    },
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        itemCount: product_list.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (BuildContext context, int index) {
+          return SingleProduct(
+              prod_name: product_list[index]["name"],
+              prod_old_price: product_list[index]["old_price"],
+              prod_picture: product_list[index]["picture"],
+              prod_price: product_list[index]["price"]);
+        });
   }
 }
