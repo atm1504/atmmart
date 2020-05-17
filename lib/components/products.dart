@@ -16,7 +16,7 @@ class _ProductsState extends State<Products> {
       "price": 179,
     },
     {
-      "name": "Tshirt",
+      "name": "Jeans",
       "picture":
           "https://rukminim1.flixcart.com/image/880/1056/k0sgl8w0/jean/x/c/7/32-udjno5165-u-s-polo-association-original-imafkg6yfnmdgry6.jpeg?q=50",
       "old_price": 1999,
@@ -37,7 +37,7 @@ class _ProductsState extends State<Products> {
       "price": "179",
     },
     {
-      "name": "Tshirt",
+      "name": "Jeans",
       "picture":
           "https://rukminim1.flixcart.com/image/880/1056/k0sgl8w0/jean/x/c/7/32-udjno5165-u-s-polo-association-original-imafkg6yfnmdgry6.jpeg?q=50",
       "old_price": 1999,
@@ -89,7 +89,7 @@ class SingleProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Hero(
-          tag: prod_name,
+          tag: Text("test-1"),
           child: Material(
             child: InkWell(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(

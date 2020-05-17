@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
         dotColor: Colors.red,
+        dotBgColor: Colors.transparent,
       ),
     );
     return Scaffold(
@@ -125,9 +126,9 @@ class _HomePageState extends State<HomePage> {
               splashColor: Colors.red,
               highlightColor: Colors.yellow,
               child: ListTile(
-                title: Text("Categories"),
+                title: Text("Shopping Cart"),
                 leading: Icon(
-                  Icons.dashboard,
+                  Icons.shopping_cart,
                   color: Colors.red,
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:atmmart/main.dart';
 
 class ProductDetails extends StatefulWidget {
   String prod_name;
@@ -18,18 +19,17 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text("atmmart"),
+        title: InkWell(
+          child: Text("atmmart"),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
               Icons.search,
-              color: Colors.yellow[800],
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
               color: Colors.yellow[800],
             ),
             onPressed: () {},
