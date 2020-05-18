@@ -26,7 +26,7 @@ class _CartProductsState extends State<CartProducts> {
   }
 }
 
-class CartProduct extends StatelessWidget {
+class CartProduct extends StatefulWidget {
   String prod_name;
   String prod_picture;
   String size;
@@ -42,17 +42,21 @@ class CartProduct extends StatelessWidget {
     this.quantity,
     this.prod_price,
   });
+  @override
+  _CartProductState createState() => _CartProductState();
+}
 
+class _CartProductState extends State<CartProduct> {
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: Image.network(
-          prod_picture,
+          widget.prod_picture,
           width: 60,
           height: 80,
         ),
-        title: Text(prod_name),
+        title: Text(widget.prod_name),
         subtitle: Column(
           children: <Widget>[
             Row(
@@ -63,7 +67,7 @@ class CartProduct extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    "${size} ",
+                    "${widget.size} ",
                     style: TextStyle(color: Colors.red),
                   ),
                   flex: 2,
@@ -74,7 +78,7 @@ class CartProduct extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    "${color} ",
+                    "${widget.color} ",
                     style: TextStyle(color: Colors.red),
                   ),
                   flex: 2,
@@ -87,7 +91,7 @@ class CartProduct extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      "\$${prod_price}",
+                      "\$${widget.prod_price}",
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -101,13 +105,17 @@ class CartProduct extends StatelessWidget {
                         IconButton(
                             icon: Icon(Icons.arrow_drop_up),
                             onPressed: () {
-                              quantity += 1;
+                              setState(() {
+                                widget.quantity += 1;
+                              });
                             }),
-                        Text("$quantity"),
+                        Text("${widget.quantity}"),
                         IconButton(
                             icon: Icon(Icons.arrow_drop_down),
                             onPressed: () {
-                              quantity -= 1;
+                              setState(() {
+                                widget.quantity -= 1;
+                              });
                             }),
                       ],
                     ),
@@ -120,5 +128,6 @@ class CartProduct extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }
