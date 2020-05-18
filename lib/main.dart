@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:atmmart/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'components/horizontal_list_view.dart';
@@ -61,7 +62,10 @@ class _HomePageState extends State<HomePage> {
               Icons.shopping_cart,
               color: Colors.yellow[800],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Cart()));
+            },
           ),
         ],
       ),
@@ -122,7 +126,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cart()));
+              },
               splashColor: Colors.red,
               highlightColor: Colors.yellow,
               child: ListTile(
