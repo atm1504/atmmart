@@ -1,6 +1,7 @@
 import 'package:atmmart/data/products.dart';
 import 'package:flutter/material.dart';
 import 'package:atmmart/main.dart';
+import 'package:atmmart/pages/home.dart';
 import 'package:atmmart/components/products.dart';
 
 class ProductDetails extends StatefulWidget {
