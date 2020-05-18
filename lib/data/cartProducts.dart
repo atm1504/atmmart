@@ -1,4 +1,8 @@
-var products = [
+List getCartProducts() {
+  return cart_products;
+}
+
+var cart_products = [
   {
     "name": "Jeans",
     "picture":
@@ -27,7 +31,3 @@ var products = [
     "quantity": 3,
   }
 ];
-
-List getCartProducts() {
-  return products;
-}
