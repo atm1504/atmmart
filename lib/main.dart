@@ -180,10 +180,11 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           imageCarousel,
           Container(
+            alignment: Alignment.topLeft,
             color: Colors.blue,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -198,6 +199,7 @@ class _HomePageState extends State<HomePage> {
           ),
           HorizontalList(),
           Container(
+            alignment: Alignment.topLeft,
             color: Colors.blue,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -210,8 +212,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Container(
-            height: 320,
+          Flexible(
             child: Products(),
           )
         ],
