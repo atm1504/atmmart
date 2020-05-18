@@ -40,6 +40,7 @@ class _LoginState extends State<Login> {
   }
 
   Future handleSignIn() async {
+    Fluttertoast.showToast(msg: "Called");
     preferences = await SharedPreferences.getInstance();
     setState(() {
       loading = true;
