@@ -40,7 +40,6 @@ class _LoginState extends State<Login> {
   }
 
   Future handleSignIn() async {
-    Fluttertoast.showToast(msg: "Called");
     preferences = await SharedPreferences.getInstance();
     setState(() {
       loading = true;
@@ -65,6 +64,7 @@ class _LoginState extends State<Login> {
           .getDocuments();
       final List<DocumentSnapshot> documnents = result.documents;
       if (documnents.length == 0) {
+        print("Inside doc  length");
         Firestore.instance
             .collection("users")
             .document(firebaseUser.uid)
@@ -110,18 +110,25 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           Center(
             child: FlatButton(
+              color: Colors.red.shade900,
               onPressed: () {
                 handleSignIn();
               },
-              child: Text("Sign In/ Sign In With Google"),
+              child: Text(
+                "Sign In/ Sign In With Google",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           Visibility(
             visible: loading ?? true,
-            child: Container(
-              color: Colors.white.withOpacity(0.7),
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            child: Center(
+              child: Container(
+                alignment: Alignment.center,
+                color: Colors.white.withOpacity(0.7),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                ),
               ),
             ),
           )
