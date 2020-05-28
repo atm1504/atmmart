@@ -131,10 +131,11 @@ class _LoginState extends State<Login> {
                               padding: const EdgeInsets.all(8.0),
                               child: Material(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withOpacity(0.3),
                                 elevation: 0.2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 12),
+                                  padding: EdgeInsets.only(
+                                      left: 12, top: 5, bottom: 5),
                                   child: TextFormField(
                                     controller: _emailTextController,
                                     decoration: InputDecoration(
@@ -143,6 +144,8 @@ class _LoginState extends State<Login> {
                                       hintText: "Email",
                                       icon: Icon(Icons.email),
                                     ),
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -164,19 +167,24 @@ class _LoginState extends State<Login> {
                               padding: const EdgeInsets.all(8.0),
                               child: Material(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withOpacity(0.3),
                                 elevation: 0.2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 12),
+                                  padding: const EdgeInsets.only(
+                                      left: 12, top: 5, bottom: 5),
                                   child: TextFormField(
                                     controller: _passwordTextController,
+                                    cursorColor: Colors.red,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
                                       labelText: "Password",
                                       hintText: "Password",
+                                      fillColor: Colors.white,
                                       icon: Icon(Icons.lock_outline),
                                     ),
-                                    keyboardType: TextInputType.visiblePassword,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                    obscureText: true,
                                     validator: (value) {
                                       if (value.isEmpty) {
                                         return "Password field cannot be empty";
@@ -210,10 +218,12 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                             ),
-//                            Expanded(child: Container()),
-                            Divider(
-                              color: Colors.white,
-                              height: 10,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 80),
+                              child: Divider(
+                                color: Colors.white,
+                                height: 10,
+                              ),
                             ),
                             Text(
                               "Other Login Options",
