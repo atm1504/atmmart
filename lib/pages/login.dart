@@ -214,8 +214,12 @@ class _LoginState extends State<Login> {
       ),
       bottomNavigationBar: Container(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: FlatButton(
+          padding:
+              const EdgeInsets.only(top: 2, bottom: 10, left: 10, right: 10),
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: BorderSide(color: Colors.red)),
             color: Colors.red.shade900,
             onPressed: () {
               handleSignIn();
