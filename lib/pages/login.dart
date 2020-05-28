@@ -189,6 +189,61 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                             ),
+                            // Login Button
+                            Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blue.withOpacity(0.5),
+                                elevation: 0.2,
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: Text(
+                                    "Login",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+//                            Expanded(child: Container()),
+                            Divider(
+                              color: Colors.white,
+                              height: 10,
+                            ),
+                            Text(
+                              "Other Login Options",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: 10, left: 8, right: 8),
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.red.withOpacity(0.5),
+                                elevation: 0.2,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    handleSignIn();
+                                  },
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: Text(
+                                    "SignIn with Google ",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -210,25 +265,6 @@ class _LoginState extends State<Login> {
               ),
             ),
           ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 2, bottom: 10, left: 10, right: 10),
-          child: RaisedButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-                side: BorderSide(color: Colors.red)),
-            color: Colors.red.shade900,
-            onPressed: () {
-              handleSignIn();
-            },
-            child: Text(
-              "Sign In/ Sign In With Google",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
         ),
       ),
     );
