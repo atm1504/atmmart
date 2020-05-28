@@ -243,14 +243,45 @@ class _LoginState extends State<Login> {
                                     handleSignIn();
                                   },
                                   minWidth: MediaQuery.of(context).size.width,
-                                  child: Text(
-                                    "SignIn with Google ",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 30,
+                                        child: Image.network(
+                                          "https://img.icons8.com/bubbles/2x/google-logo.png",
+                                          height: 50,
+                                          width: 50,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: 30,
+                                          color: Colors.white,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 140,
+                                        child: Text(
+                                          "Signin With Google",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
                                   ),
+//                                  child: Text(
+//                                    "SignIn with Google ",
+//                                    textAlign: TextAlign.center,
+//                                    style: TextStyle(
+//                                        color: Colors.white,
+//                                        fontSize: 18,
+//                                        fontWeight: FontWeight.bold),
+//                                  ),
                                 ),
                               ),
                             ),
