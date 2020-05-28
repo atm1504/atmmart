@@ -14,6 +14,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedin = false;
@@ -99,11 +102,58 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Image.network(
-            "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg",
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+//          Image.network(
+//            "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg",
+//            fit: BoxFit.cover,
+//            width: double.infinity,
+//            height: double.infinity,
+//          ),
+//          Container(
+//            color: Colors.red.withOpacity(0.2),
+//            width: double.infinity,
+//            height: double.infinity,
+//          ),
+          Container(
+            alignment: Alignment.center,
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Material(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white.withOpacity(0.5),
+                      elevation: 0.2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _emailTextController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Email",
+                            hintText: "Email",
+                            icon: Icon(Icons.email),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              Pattern pattern =
+                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                              RegExp regex = new RegExp(pattern);
+                              if (!regex.hasMatch(value)) {
+                                return 'Please make sure your email address is valid';
+                              }
+                              return null;
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Visibility(
             visible: loading ?? true,
