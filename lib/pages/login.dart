@@ -97,28 +97,13 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: new Text(
-          "Login",
-          style: TextStyle(color: Colors.red.shade900),
-        ),
-        elevation: 0.1,
-      ),
       body: Stack(
         children: <Widget>[
-          Center(
-            child: FlatButton(
-              color: Colors.red.shade900,
-              onPressed: () {
-                handleSignIn();
-              },
-              child: Text(
-                "Sign In/ Sign In With Google",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+          Image.network(
+            "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg",
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           ),
           Visibility(
             visible: loading ?? true,
@@ -133,6 +118,21 @@ class _LoginState extends State<Login> {
             ),
           )
         ],
+      ),
+      bottomNavigationBar: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: FlatButton(
+            color: Colors.red.shade900,
+            onPressed: () {
+              handleSignIn();
+            },
+            child: Text(
+              "Sign In/ Sign In With Google",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
       ),
     );
   }
