@@ -16,6 +16,7 @@ class _SignUpState extends State<SignUp> {
       TextEditingController();
   TextEditingController _nameTextController = TextEditingController();
   String gender;
+  String groupValue = "male";
   bool loading = false;
 
   @override
@@ -23,17 +24,16 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.8),
+          color: Colors.black.withOpacity(0.5),
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(
-                "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg"),
+            image: ExactAssetImage("images/atm.jpg"),
           ),
         ),
         child: Stack(
           children: <Widget>[
             Container(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withOpacity(0.6),
               width: double.infinity,
               height: double.infinity,
             ),
@@ -84,6 +84,59 @@ class _SignUpState extends State<SignUp> {
                                       return null;
                                     },
                                   ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                color: Colors.white.withOpacity(0.3),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Text(
+                                          "Male",
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
+                                        trailing: Radio(
+                                            value: "male",
+                                            activeColor: Colors.blue,
+                                            hoverColor: Colors.yellow,
+                                            groupValue: groupValue,
+                                            onChanged: (e) {
+                                              setState(() {
+                                                groupValue = e;
+                                              });
+                                            }),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Text(
+                                          "Female",
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
+                                        trailing: Radio(
+                                            value: "female",
+                                            activeColor: Colors.blue,
+                                            hoverColor: Colors.yellow,
+                                            groupValue: groupValue,
+                                            onChanged: (e) {
+                                              setState(() {
+                                                groupValue = e;
+                                              });
+                                            }),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -202,7 +255,7 @@ class _SignUpState extends State<SignUp> {
                                   onPressed: () {},
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Text(
-                                    "Register",
+                                    "Sign Up",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,

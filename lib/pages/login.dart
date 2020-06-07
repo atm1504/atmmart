@@ -103,17 +103,16 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.8),
+          color: Colors.black.withOpacity(0.5),
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(
-                "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg"),
+            image: ExactAssetImage("images/atm.jpg"),
           ),
         ),
         child: Stack(
           children: <Widget>[
             Container(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withOpacity(0.6),
               width: double.infinity,
               height: double.infinity,
             ),
