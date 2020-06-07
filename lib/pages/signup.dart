@@ -58,6 +58,41 @@ class _SignUpState extends State<SignUp> {
                                   padding: EdgeInsets.only(
                                       left: 12, top: 5, bottom: 5),
                                   child: TextFormField(
+                                    controller: _nameTextController,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Name",
+                                      hintText: "Name",
+                                      icon: Icon(Icons.people),
+                                    ),
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
+                                    keyboardType: TextInputType.text,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        if (value.isEmpty) {
+                                          return "Name field cannot be empty";
+                                        } else if (value.length < 6) {
+                                          return "Name must be atleast 2 characters long";
+                                        }
+                                        return null;
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white.withOpacity(0.3),
+                                elevation: 0.2,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 12, top: 5, bottom: 5),
+                                  child: TextFormField(
                                     controller: _emailTextController,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
@@ -100,6 +135,40 @@ class _SignUpState extends State<SignUp> {
                                       border: OutlineInputBorder(),
                                       labelText: "Password",
                                       hintText: "Password",
+                                      fillColor: Colors.white,
+                                      icon: Icon(Icons.lock_outline),
+                                    ),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                    obscureText: true,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return "Password field cannot be empty";
+                                      } else if (value.length < 6) {
+                                        return "Password must be atleast 6 characters long";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white.withOpacity(0.3),
+                                elevation: 0.2,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 12, top: 5, bottom: 5),
+                                  child: TextFormField(
+                                    controller: _confirmPasswordTextController,
+                                    cursorColor: Colors.red,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Confirm Password",
+                                      hintText: "Confirm Password",
                                       fillColor: Colors.white,
                                       icon: Icon(Icons.lock_outline),
                                     ),
@@ -168,65 +237,6 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 80),
-                              child: Divider(
-                                color: Colors.white,
-                                height: 10,
-                              ),
-                            ),
-                            Text(
-                              "Other Login Options",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(top: 10, left: 8, right: 8),
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red.withOpacity(0.5),
-                                elevation: 0.2,
-                                child: MaterialButton(
-                                  onPressed: () {
-//                                    handleSignIn();
-                                  },
-                                  minWidth: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        flex: 30,
-                                        child: Image.network(
-                                          "https://img.icons8.com/bubbles/2x/google-logo.png",
-                                          height: 50,
-                                          width: 50,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          height: 30,
-                                          color: Colors.white,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 140,
-                                        child: Text(
-                                          "Signin With Google",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
                               ),
                             ),
                           ],
