@@ -129,6 +129,10 @@ class _LoginState extends State<Login> {
                         child: Column(
                           children: <Widget>[
                             Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Image.asset("images/atmmart_logo.png"),
+                            ),
+                            Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Material(
                                 borderRadius: BorderRadius.circular(20),
