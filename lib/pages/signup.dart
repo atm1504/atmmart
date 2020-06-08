@@ -64,7 +64,7 @@ class _SignUpState extends State<SignUp> {
                                   child: TextFormField(
                                     controller: _nameTextController,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Name",
                                       hintText: "Name",
                                       icon: Icon(Icons.people),
@@ -111,6 +111,7 @@ class _SignUpState extends State<SignUp> {
                                             onChanged: (e) {
                                               setState(() {
                                                 groupValue = e;
+                                                gender = e;
                                               });
                                             }),
                                       ),
@@ -132,6 +133,7 @@ class _SignUpState extends State<SignUp> {
                                             onChanged: (e) {
                                               setState(() {
                                                 groupValue = e;
+                                                gender = e;
                                               });
                                             }),
                                       ),
@@ -152,7 +154,7 @@ class _SignUpState extends State<SignUp> {
                                   child: TextFormField(
                                     controller: _emailTextController,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Email",
                                       hintText: "Email",
                                       icon: Icon(Icons.email),
@@ -161,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                                         fontSize: 18, color: Colors.white),
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
-                                      if (value.isEmpty) {
+                                      if (!value.isEmpty) {
                                         Pattern pattern =
                                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                         RegExp regex = new RegExp(pattern);
@@ -169,8 +171,9 @@ class _SignUpState extends State<SignUp> {
                                           return 'Please make sure your email address is valid';
                                         }
                                         return null;
+                                      } else {
+                                        return "Email Field cannot be empty";
                                       }
-                                      return null;
                                     },
                                   ),
                                 ),
@@ -189,7 +192,7 @@ class _SignUpState extends State<SignUp> {
                                     controller: _passwordTextController,
                                     cursorColor: Colors.red,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Password",
                                       hintText: "Password",
                                       fillColor: Colors.white,
@@ -223,7 +226,7 @@ class _SignUpState extends State<SignUp> {
                                     controller: _confirmPasswordTextController,
                                     cursorColor: Colors.red,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Confirm Password",
                                       hintText: "Confirm Password",
                                       fillColor: Colors.white,
@@ -237,6 +240,9 @@ class _SignUpState extends State<SignUp> {
                                         return "Password field cannot be empty";
                                       } else if (value.length < 6) {
                                         return "Password must be atleast 6 characters long";
+                                      } else if (_passwordTextController !=
+                                          value) {
+                                        return "Password fields didn't match";
                                       }
                                       return null;
                                     },

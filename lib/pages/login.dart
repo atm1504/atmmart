@@ -143,7 +143,7 @@ class _LoginState extends State<Login> {
                                   child: TextFormField(
                                     controller: _emailTextController,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Email",
                                       hintText: "Email",
                                       icon: Icon(Icons.email),
@@ -180,7 +180,7 @@ class _LoginState extends State<Login> {
                                     controller: _passwordTextController,
                                     cursorColor: Colors.red,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Password",
                                       hintText: "Password",
                                       fillColor: Colors.white,
