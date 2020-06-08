@@ -91,6 +91,7 @@ class _LoginState extends State<Login> {
         await preferences.setString("email", documnents[0]["email"]);
       }
       Fluttertoast.showToast(msg: "Successfully Logged In");
+      preferences.setBool("isloggedin", true);
       setState(() {
         loading = false;
       });
@@ -153,7 +154,7 @@ class _LoginState extends State<Login> {
                                         fontSize: 18, color: Colors.white),
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
-                                      if (value.isEmpty) {
+                                      if (!value.isEmpty) {
                                         Pattern pattern =
                                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                         RegExp regex = new RegExp(pattern);
