@@ -18,6 +18,8 @@ class _SignUpState extends State<SignUp> {
   String gender;
   String groupValue = "male";
   bool loading = false;
+  bool isInvisible = true;
+  bool isConfirmInvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -188,27 +190,51 @@ class _SignUpState extends State<SignUp> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 12, top: 5, bottom: 5),
-                                  child: TextFormField(
-                                    controller: _passwordTextController,
-                                    cursorColor: Colors.red,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      labelText: "Password",
-                                      hintText: "Password",
-                                      fillColor: Colors.white,
-                                      icon: Icon(Icons.lock_outline),
-                                    ),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                    obscureText: true,
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return "Password field cannot be empty";
-                                      } else if (value.length < 6) {
-                                        return "Password must be atleast 6 characters long";
-                                      }
-                                      return null;
-                                    },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 10,
+                                        child: TextFormField(
+                                          controller: _passwordTextController,
+                                          cursorColor: Colors.red,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: "Password",
+                                            hintText: "Password",
+                                            fillColor: Colors.white,
+                                            icon: Icon(Icons.lock_outline),
+                                          ),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                          obscureText: isInvisible,
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return "Password field cannot be empty";
+                                            } else if (value.length < 6) {
+                                              return "Password must be atleast 6 characters long";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5),
+                                          child: IconButton(
+                                            icon: Icon(Icons.remove_red_eye),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              setState(() {
+                                                isInvisible = !isInvisible;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
@@ -222,30 +248,56 @@ class _SignUpState extends State<SignUp> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 12, top: 5, bottom: 5),
-                                  child: TextFormField(
-                                    controller: _confirmPasswordTextController,
-                                    cursorColor: Colors.red,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      labelText: "Confirm Password",
-                                      hintText: "Confirm Password",
-                                      fillColor: Colors.white,
-                                      icon: Icon(Icons.lock_outline),
-                                    ),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                    obscureText: true,
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return "Password field cannot be empty";
-                                      } else if (value.length < 6) {
-                                        return "Password must be atleast 6 characters long";
-                                      } else if (_passwordTextController !=
-                                          value) {
-                                        return "Password fields didn't match";
-                                      }
-                                      return null;
-                                    },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 10,
+                                        child: TextFormField(
+                                          controller:
+                                              _confirmPasswordTextController,
+                                          cursorColor: Colors.red,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: "Confirm Password",
+                                            hintText: "Confirm Password",
+                                            fillColor: Colors.white,
+                                            icon: Icon(Icons.lock_outline),
+                                          ),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                          obscureText: isConfirmInvisible,
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return "Password field cannot be empty";
+                                            } else if (value.length < 6) {
+                                              return "Password must be atleast 6 characters long";
+                                            } else if (_passwordTextController !=
+                                                value) {
+                                              return "Password fields didn't match";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5),
+                                          child: IconButton(
+                                            icon: Icon(Icons.remove_red_eye),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              setState(() {
+                                                isConfirmInvisible =
+                                                    !isConfirmInvisible;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
