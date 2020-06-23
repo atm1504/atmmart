@@ -1,8 +1,11 @@
+import 'package:atmmart/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:atmmart/components/horizontal_list_view.dart';
 import 'package:atmmart/components/products.dart';
 import 'package:atmmart/pages/cart.dart';
+
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -165,6 +168,23 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(
                   Icons.help,
                   color: Colors.blue,
+                ),
+              ),
+            ),
+            Divider(),
+            InkWell(
+              onTap: () {
+                logout();
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              splashColor: Colors.red,
+              highlightColor: Colors.yellow,
+              child: ListTile(
+                title: Text("LogOut"),
+                leading: Icon(
+                  Icons.lock_open,
+                  color: Colors.red,
                 ),
               ),
             ),

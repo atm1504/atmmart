@@ -22,3 +22,11 @@ setUserData(String username, String email, String gender) async {
   preferences.setString(EMAIL, email);
   preferences.setString(GENDER, gender);
 }
+
+logout() async {
+  preferences = await SharedPreferences.getInstance();
+  preferences.setBool(IS_LOGGED_IN, false);
+  preferences.setString(USERNAME, "");
+  preferences.setString(EMAIL, "");
+  preferences.setString(GENDER, "");
+}
