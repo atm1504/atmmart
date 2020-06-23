@@ -406,7 +406,6 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future validateRegistrationForm() async {
-    print(gender);
     FormState formState = _formKey.currentState;
     if (formState.validate()) {
 //      FirebaseUser user = await firebaseAuth.currentUser();
@@ -423,23 +422,29 @@ class _SignUpState extends State<SignUp> {
                   "gender": gender
                 })
               })
-          .then((user) {
+          .then((userqwer) async {
+        // Adding display name
+        FirebaseUser user = await firebaseAuth.currentUser();
+        UserUpdateInfo updateInfo = UserUpdateInfo();
+        updateInfo.displayName = _nameTextController.text;
+        user.updateProfile(updateInfo);
+
+        // Store data in preference
         preferences.setBool(IS_LOGGED_IN, true);
         setUserData(
             _nameTextController.text, _emailTextController.text, gender);
+
+        // Post success task
         showToast("Successfully registered the user!");
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }).catchError((err) {
+        // Errors
         showToast(
-            "Some Errors occured while registering the user! Please try again");
+            "Email id already registered! Login instead of again registering!");
         preferences.setBool(IS_LOGGED_IN, false);
         print(err.toString());
       });
-//      if (preferences.getBool(IS_LOGGED_IN)) {
-//        Navigator.pushReplacement(
-//            context, MaterialPageRoute(builder: (context) => HomePage()));
-//      }
     } else {
       showToast("Form not validated");
     }

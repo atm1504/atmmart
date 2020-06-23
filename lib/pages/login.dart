@@ -1,5 +1,6 @@
 import 'package:atmmart/pages/signup.dart';
 import 'package:atmmart/utils/constants.dart';
+import 'package:atmmart/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,6 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Firestore _firestore = Firestore.instance;
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedin = false;
@@ -46,7 +48,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future handleSignIn() async {
+  Future handleGoogleSignIn() async {
     preferences = await SharedPreferences.getInstance();
     setState(() {
       loading = true;
@@ -100,6 +102,49 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } else {}
+  }
+
+// Handle login using firebase email and password
+  void handleEmailLogin() async {
+    setState(() {
+      loading = true;
+    });
+    String email = _emailTextController.text;
+    String password = _passwordTextController.text;
+
+    // Check if user exists or not
+    await firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((user) => {
+//              print("I am here")
+              handlePostUserSignIn(user)
+            })
+        .catchError((e) => {
+              showToast(
+                  "Please check Your credentials! You might have entered wrong credentials or have not registered yet!")
+            });
+    setState(() {
+      loading = false;
+    });
+  }
+
+  handlePostUserSignIn(AuthResult user) async {
+    await Firestore.instance
+        .collection(USERS)
+        .document(user.user.uid)
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      var data = snapshot.data;
+      setUserData(data["username"], data["email"], data["gender"]);
+      preferences.setBool(IS_LOGGED_IN, true);
+      setState(() {
+        loading = false;
+      });
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }).catchError((err) {
+      print("Error occured");
+    });
   }
 
   @override
@@ -237,7 +282,9 @@ class _LoginState extends State<Login> {
                                 color: Colors.blue.withOpacity(0.5),
                                 elevation: 0.2,
                                 child: MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    handleEmailLogin();
+                                  },
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Text(
                                     "Login",
@@ -304,7 +351,7 @@ class _LoginState extends State<Login> {
                                 elevation: 0.2,
                                 child: MaterialButton(
                                   onPressed: () {
-                                    handleSignIn();
+                                    handleGoogleSignIn();
                                   },
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Row(
