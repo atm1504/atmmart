@@ -16,18 +16,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   SharedPreferences preferences;
+  String username = " ";
+  String email = " ";
   @override
   void initState() {
     super.initState();
-    isSignedIn();
+    initialize();
   }
 
-  void isSignedIn() async {
+  void initialize() async {
     preferences = await SharedPreferences.getInstance();
     if (preferences.getBool(IS_LOGGED_IN) == false) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Login()));
     }
+    setState(() {
+      username = preferences.getString(USERNAME);
+      email = preferences.getString(EMAIL);
+    });
   }
 
   @override
@@ -85,15 +91,17 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             // Header
             UserAccountsDrawerHeader(
-              accountName: Text("atm"),
-              accountEmail: Text("atm1504.in@gmail.com"),
+              accountName: Text(username),
+              accountEmail: Text(email),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
+                  backgroundImage: NetworkImage(PHOTO_URL),
                   backgroundColor: Colors.grey,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
+
+//                  child: Icon(
+//                    Icons.person,
+//                    color: Colors.white,
+//                  ),
                 ),
               ),
               decoration: BoxDecoration(
