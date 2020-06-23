@@ -1,14 +1,14 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserServices {
-  FirebaseDatabase _database = FirebaseDatabase.instance;
-  String ref = "users";
+  Firestore _firestore = Firestore.instance;
+  String collection = "users";
 
-  createUser(String uid, Map value) {
-    _database
-        .reference()
-        .child("$ref/$uid")
-        .set(value)
-        .catchError((e) => {print(" Khanki " + e.toString())});
+  createUser(String uid, var value) {
+    _firestore
+        .collection(collection)
+        .document(uid)
+        .setData(value)
+        .catchError((e) => {print(e.toString())});
   }
 }
