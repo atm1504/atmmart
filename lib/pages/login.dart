@@ -1,4 +1,5 @@
 import 'package:atmmart/pages/signup.dart';
+import 'package:atmmart/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,7 +36,8 @@ class _LoginState extends State<Login> {
     });
     preferences = await SharedPreferences.getInstance();
     isLoggedin = await googleSignIn.isSignedIn();
-    if (isLoggedin) {
+
+    if (isLoggedin == true || preferences.getBool(IS_LOGGED_IN) == true) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     }
