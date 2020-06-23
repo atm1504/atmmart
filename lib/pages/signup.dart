@@ -1,9 +1,10 @@
 import 'package:atmmart/db/users.dart';
 import 'package:atmmart/pages/home.dart';
 import 'package:atmmart/pages/login.dart';
+import 'package:atmmart/utils/constants.dart';
+import 'package:atmmart/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
@@ -28,9 +29,14 @@ class _SignUpState extends State<SignUp> {
   bool isConfirmInvisible = true;
 
   @override
-  void initState() async {
+  void initState() {
+    super.initState();
+    isSignedIn();
+  }
+
+  void isSignedIn() async {
     preferences = await SharedPreferences.getInstance();
-    if (preferences.getBool("isloggedin")) {
+    if (preferences.getBool(IS_LOGGED_IN)) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     }
@@ -398,48 +404,40 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void validateRegistrationForm() async {
+  Future validateRegistrationForm() async {
     FormState formState = _formKey.currentState;
     if (formState.validate()) {
-      FirebaseUser user = await firebaseAuth.currentUser();
+//      FirebaseUser user = await firebaseAuth.currentUser();
       // errors here
-      if (user == null) {
-        firebaseAuth
-            .createUserWithEmailAndPassword(
-                email: _emailTextController.text,
-                password: _passwordTextController.text)
-            .then((users) => {
-                  _userServices.createUser(users.user.uid, {
-                    "username": users.user.displayName,
-                    "email": users.user.email,
-                    "userId": users.user.uid,
-                    "gender": gender
-                  })
+      firebaseAuth
+          .createUserWithEmailAndPassword(
+              email: _emailTextController.text,
+              password: _passwordTextController.text)
+          .then((users) => {
+                _userServices.createUser(users.user.uid, {
+                  "username": users.user.displayName,
+                  "email": users.user.email,
+                  "userId": users.user.uid,
+                  "gender": gender
                 })
-            .catchError((err) {
-          print(err.toString());
-        });
+              })
+          .then((user) {
+        preferences.setBool(IS_LOGGED_IN, true);
+        setUserData(
+            _nameTextController.text, _emailTextController.text, gender);
+        showToast("Successfully registered the user!");
+      }).catchError((err) {
+        showToast(
+            "Some Errors occured while registering the user! Please try again");
+        preferences.setBool(IS_LOGGED_IN, false);
+        print(err.toString());
+      });
+      if (preferences.getBool(IS_LOGGED_IN)) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Login()));
-      } else {
-        Fluttertoast.showToast(
-            msg: "User found",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     } else {
-      Fluttertoast.showToast(
-          msg: "Form not validated",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showToast("Form not validated");
     }
   }
 }
