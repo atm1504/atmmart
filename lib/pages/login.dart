@@ -20,6 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Firestore _firestore = Firestore.instance;
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedin = false;
@@ -112,9 +113,12 @@ class _LoginState extends State<Login> {
     String password = _passwordTextController.text;
 
     // Check if user exists or not
-    firebaseAuth
+    await firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
-        .then((user) => {handlePostUserSignIn(user)})
+        .then((user) => {
+//              print("I am here")
+              handlePostUserSignIn(user)
+            })
         .catchError((e) => {
               showToast(
                   "Please check Your credentials! You might have entered wrong credentials or have not registered yet!")
@@ -124,8 +128,23 @@ class _LoginState extends State<Login> {
     });
   }
 
-  handlePostUserSignIn(AuthResult user) {
-    print(user.user.uid);
+  handlePostUserSignIn(AuthResult user) async {
+    await Firestore.instance
+        .collection(USERS)
+        .document(user.user.uid)
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      var data = snapshot.data;
+      setUserData(data["username"], data["email"], data["gender"]);
+      preferences.setBool(IS_LOGGED_IN, true);
+      setState(() {
+        loading = false;
+      });
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }).catchError((err) {
+      print("Error occured");
+    });
   }
 
   @override
