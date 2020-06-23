@@ -7,9 +7,8 @@ class UserServices {
   createUser(String uid, Map value) {
     _database
         .reference()
-        .child(ref)
-        .push()
+        .child("$ref/$uid")
         .set(value)
-        .catchError((e) => {print(e.toString())});
+        .catchError((e) => {print(" Khanki " + e.toString())});
   }
 }

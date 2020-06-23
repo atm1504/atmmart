@@ -21,7 +21,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _confirmPasswordTextController =
       TextEditingController();
   TextEditingController _nameTextController = TextEditingController();
-  String gender;
+  String gender = "male";
   String groupValue = "male";
   bool loading = false;
   bool isInvisible = true;
@@ -151,6 +151,7 @@ class _SignUpState extends State<SignUp> {
                                             hoverColor: Colors.yellow,
                                             groupValue: groupValue,
                                             onChanged: (e) {
+                                              print(e);
                                               setState(() {
                                                 groupValue = e;
                                                 gender = e;
@@ -405,6 +406,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future validateRegistrationForm() async {
+    print(gender);
     FormState formState = _formKey.currentState;
     if (formState.validate()) {
 //      FirebaseUser user = await firebaseAuth.currentUser();
@@ -415,7 +417,7 @@ class _SignUpState extends State<SignUp> {
               password: _passwordTextController.text)
           .then((users) => {
                 _userServices.createUser(users.user.uid, {
-                  "username": users.user.displayName,
+                  "username": _nameTextController.text,
                   "email": users.user.email,
                   "userId": users.user.uid,
                   "gender": gender
@@ -426,16 +428,18 @@ class _SignUpState extends State<SignUp> {
         setUserData(
             _nameTextController.text, _emailTextController.text, gender);
         showToast("Successfully registered the user!");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }).catchError((err) {
         showToast(
             "Some Errors occured while registering the user! Please try again");
         preferences.setBool(IS_LOGGED_IN, false);
         print(err.toString());
       });
-      if (preferences.getBool(IS_LOGGED_IN)) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      }
+//      if (preferences.getBool(IS_LOGGED_IN)) {
+//        Navigator.pushReplacement(
+//            context, MaterialPageRoute(builder: (context) => HomePage()));
+//      }
     } else {
       showToast("Form not validated");
     }
