@@ -423,7 +423,11 @@ class _SignUpState extends State<SignUp> {
                   "gender": gender
                 })
               })
-          .then((user) {
+          .then((userqwer) async {
+        FirebaseUser user = await firebaseAuth.currentUser();
+        UserUpdateInfo updateInfo = UserUpdateInfo();
+        updateInfo.displayName = _nameTextController.text;
+        user.updateProfile(updateInfo);
         preferences.setBool(IS_LOGGED_IN, true);
         setUserData(
             _nameTextController.text, _emailTextController.text, gender);
@@ -436,10 +440,6 @@ class _SignUpState extends State<SignUp> {
         preferences.setBool(IS_LOGGED_IN, false);
         print(err.toString());
       });
-//      if (preferences.getBool(IS_LOGGED_IN)) {
-//        Navigator.pushReplacement(
-//            context, MaterialPageRoute(builder: (context) => HomePage()));
-//      }
     } else {
       showToast("Form not validated");
     }
