@@ -1,5 +1,6 @@
 import 'package:atmmart/pages/signup.dart';
 import 'package:atmmart/utils/constants.dart';
+import 'package:atmmart/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -46,7 +47,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future handleSignIn() async {
+  Future handleGoogleSignIn() async {
     preferences = await SharedPreferences.getInstance();
     setState(() {
       loading = true;
@@ -100,6 +101,31 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } else {}
+  }
+
+// Handle login using firebase email and password
+  void handleEmailLogin() async {
+    setState(() {
+      loading = true;
+    });
+    String email = _emailTextController.text;
+    String password = _passwordTextController.text;
+
+    // Check if user exists or not
+    firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((user) => {handlePostUserSignIn(user)})
+        .catchError((e) => {
+              showToast(
+                  "Please check Your credentials! You might have entered wrong credentials or have not registered yet!")
+            });
+    setState(() {
+      loading = false;
+    });
+  }
+
+  handlePostUserSignIn(AuthResult user) {
+    print(user.user.uid);
   }
 
   @override
@@ -237,7 +263,9 @@ class _LoginState extends State<Login> {
                                 color: Colors.blue.withOpacity(0.5),
                                 elevation: 0.2,
                                 child: MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    handleEmailLogin();
+                                  },
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Text(
                                     "Login",
@@ -304,7 +332,7 @@ class _LoginState extends State<Login> {
                                 elevation: 0.2,
                                 child: MaterialButton(
                                   onPressed: () {
-                                    handleSignIn();
+                                    handleGoogleSignIn();
                                   },
                                   minWidth: MediaQuery.of(context).size.width,
                                   child: Row(
