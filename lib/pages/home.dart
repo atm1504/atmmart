@@ -1,8 +1,13 @@
+import 'package:atmmart/utils/constants.dart';
+import 'package:atmmart/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:atmmart/components/horizontal_list_view.dart';
 import 'package:atmmart/components/products.dart';
 import 'package:atmmart/pages/cart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,6 +15,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  SharedPreferences preferences;
+  @override
+  void initState() {
+    super.initState();
+    isSignedIn();
+  }
+
+  void isSignedIn() async {
+    preferences = await SharedPreferences.getInstance();
+    if (preferences.getBool(IS_LOGGED_IN) == false) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Login()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget imageCarousel = Container(
@@ -165,6 +185,23 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(
                   Icons.help,
                   color: Colors.blue,
+                ),
+              ),
+            ),
+            Divider(),
+            InkWell(
+              onTap: () {
+                logout();
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              splashColor: Colors.red,
+              highlightColor: Colors.yellow,
+              child: ListTile(
+                title: Text("LogOut"),
+                leading: Icon(
+                  Icons.lock_open,
+                  color: Colors.red,
                 ),
               ),
             ),

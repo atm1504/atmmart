@@ -1,4 +1,5 @@
 import 'package:atmmart/pages/signup.dart';
+import 'package:atmmart/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,6 +22,7 @@ class _LoginState extends State<Login> {
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedin = false;
+  bool isInvisible = true;
 
   @override
   void initState() {
@@ -34,7 +36,8 @@ class _LoginState extends State<Login> {
     });
     preferences = await SharedPreferences.getInstance();
     isLoggedin = await googleSignIn.isSignedIn();
-    if (isLoggedin) {
+
+    if (isLoggedin == true || preferences.getBool(IS_LOGGED_IN) == true) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     }
@@ -90,6 +93,7 @@ class _LoginState extends State<Login> {
         await preferences.setString("email", documnents[0]["email"]);
       }
       Fluttertoast.showToast(msg: "Successfully Logged In");
+      preferences.setBool("isloggedin", true);
       setState(() {
         loading = false;
       });
@@ -103,17 +107,16 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.8),
+          color: Colors.black.withOpacity(0.5),
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(
-                "https://i.pinimg.com/736x/50/df/34/50df34b9e93f30269853b96b09c37e3b.jpg"),
+            image: ExactAssetImage("images/atm.jpg"),
           ),
         ),
         child: Stack(
           children: <Widget>[
             Container(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withOpacity(0.6),
               width: double.infinity,
               height: double.infinity,
             ),
@@ -144,7 +147,7 @@ class _LoginState extends State<Login> {
                                   child: TextFormField(
                                     controller: _emailTextController,
                                     decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
+                                      border: InputBorder.none,
                                       labelText: "Email",
                                       hintText: "Email",
                                       icon: Icon(Icons.email),
@@ -153,7 +156,7 @@ class _LoginState extends State<Login> {
                                         fontSize: 18, color: Colors.white),
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
-                                      if (value.isEmpty) {
+                                      if (!value.isEmpty) {
                                         Pattern pattern =
                                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                         RegExp regex = new RegExp(pattern);
@@ -177,27 +180,51 @@ class _LoginState extends State<Login> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 12, top: 5, bottom: 5),
-                                  child: TextFormField(
-                                    controller: _passwordTextController,
-                                    cursorColor: Colors.red,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: "Password",
-                                      hintText: "Password",
-                                      fillColor: Colors.white,
-                                      icon: Icon(Icons.lock_outline),
-                                    ),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                    obscureText: true,
-                                    validator: (value) {
-                                      if (value.isEmpty) {
-                                        return "Password field cannot be empty";
-                                      } else if (value.length < 6) {
-                                        return "Password must be atleast 6 characters long";
-                                      }
-                                      return null;
-                                    },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 10,
+                                        child: TextFormField(
+                                          controller: _passwordTextController,
+                                          cursorColor: Colors.red,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: "Password",
+                                            hintText: "Password",
+                                            fillColor: Colors.white,
+                                            icon: Icon(Icons.lock_outline),
+                                          ),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                          obscureText: isInvisible,
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return "Password field cannot be empty";
+                                            } else if (value.length < 6) {
+                                              return "Password must be atleast 6 characters long";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5),
+                                          child: IconButton(
+                                            icon: Icon(Icons.remove_red_eye),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              setState(() {
+                                                isInvisible = !isInvisible;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
