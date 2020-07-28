@@ -9,6 +9,7 @@ class ProductDetails extends StatefulWidget {
   String prod_url;
   var prod_price;
   var prod_old_price;
+  String size = "Size";
   ProductDetails(
       {this.prod_name, this.prod_url, this.prod_price, this.prod_old_price});
 
@@ -16,9 +17,20 @@ class ProductDetails extends StatefulWidget {
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
+//void setSize(String size){
+//  widget.size=size;
+//}
+
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
+    void setSize(String size) {
+      setState(() {
+        widget.size = size;
+      });
+      Navigator.of(context).pop(context);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -97,12 +109,72 @@ class _ProductDetailsState extends State<ProductDetails> {
                             title: Text("Size"),
                             content: Text("Choose the Size"),
                             actions: <Widget>[
-                              MaterialButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(context);
-                                },
-                                child: Text("Close"),
-                              )
+                              Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("XXS");
+                                        },
+                                        child: Text("XXS"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("XS");
+                                        },
+                                        child: Text("XS"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("S");
+                                        },
+                                        child: Text("S"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("M");
+                                        },
+                                        child: Text("M"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("L");
+                                        },
+                                        child: Text("L"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("XL");
+                                        },
+                                        child: Text("XL"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("XXL");
+                                        },
+                                        child: Text("XXL"),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          setSize("XXXL");
+                                        },
+                                        child: Text("XXXL"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           );
                         });
@@ -113,7 +185,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text("Size"),
+                        child: Text(widget.size),
                       ),
                       Expanded(
                         child: Icon(Icons.arrow_drop_down),

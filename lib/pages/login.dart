@@ -150,6 +150,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.5),
@@ -330,7 +331,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 80),
+                              padding: const EdgeInsets.only(top: 10),
                               child: Divider(
                                 color: Colors.white,
                                 height: 10,
@@ -344,9 +345,9 @@ class _LoginState extends State<Login> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsets.only(top: 10, left: 8, right: 8),
+                                  EdgeInsets.only(top: 5, left: 8, right: 8),
                               child: Material(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.red.withOpacity(0.5),
                                 elevation: 0.2,
                                 child: MaterialButton(
